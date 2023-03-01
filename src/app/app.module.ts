@@ -10,8 +10,10 @@ import { HomeComponent } from './home/home.component';
 
 import {ButtonModule} from 'primeng/button';
 import { TableModule } from 'primeng/table'
+import {CardModule} from 'primeng/card';
 
 const appRoutes : Routes = [
+  {path: "", component: HomeComponent},
   {path: ":id", component: UserInfoComponent},
 ]
 
@@ -27,7 +29,8 @@ const appRoutes : Routes = [
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
     TableModule,
-    ButtonModule
+    ButtonModule,
+    CardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
