@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -8,17 +8,22 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./user-info.component.css']
 })
 export class UserInfoComponent implements OnInit{
-  userID: number = 0;
+  userDetails: any = []
 
-  constructor(private route: ActivatedRoute, private http: HttpClient){}
+  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router){}
 
   ngOnInit(){
-    this.userID = this.route.snapshot.params['id']
-    this.fetchUserInfo(this.userID)
+    this.fetchUserInfo(this.route.snapshot.params['id'])
   }
 
-  private fetchUserInfo(id: any){
+  private fetchUserInfo(id: number){
     this.http.get(`https://reqres.in/api/users/${id}`)
-    .subscribe((response: any) => {console.log(response)})
+    .subscribe((response: any) => {
+      this.userDetails = response.data
+    })
+  }
+
+  goHome(){
+    this.router.navigateByUrl("")
   }
 }

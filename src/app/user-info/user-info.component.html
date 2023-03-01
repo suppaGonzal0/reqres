@@ -1,1 +1,17 @@
-<p>user-info works!</p>
+<div class="userProfile">
+    <p-card [style]="{
+        minWidth: '400px',
+        minHeight: '400px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    }">
+        <img src="{{userDetails.avatar}}">
+        <div class="name">
+            <b>{{userDetails.first_name}}</b>
+            <b>{{userDetails.last_name}}</b>
+        </div>
+        <p>{{userDetails.email}}</p>
+    </p-card>
+<p-button label="Go Back" (click)="goHome()"></p-button>
+</div>
