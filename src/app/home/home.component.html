@@ -1,1 +1,31 @@
-<p>home works!</p>
+<div class="tableContainer">
+    <p-table [value]="users">
+      <ng-template pTemplate="header">
+          <tr>
+              <th>ID</th>
+              <th>Firstname</th>
+              <th>Lastname</th>
+              <th>Email</th>
+              <th>Edit</th>
+              <th>Delete</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-user>
+          <tr (click)="showUserInfo(user)" class="tr">
+              <td>{{user.id}}</td>
+              <td>{{user.first_name}}</td>
+              <td>{{user.last_name}}</td>
+              <td>{{user.email}}</td>
+              <td><button pButton type="button" icon="pi pi-user-edit" (click)="editUser()"
+                iconPos="left" class="p-button-raised p-button-rounded"></button></td>
+              <td><button pButton type="button" icon="pi pi-trash" (click)="deleteUser(user.id)"
+                iconPos="left" class="p-button-raised p-button-rounded p-button-danger"></button></td>
+          </tr>
+      </ng-template>
+    </p-table>
+  
+    <div class="buttons">
+      <p-button label="Page 1" (click)="fetchUsers(1)"></p-button>
+      <p-button label="Page 2" (click)="fetchUsers(2)"></p-button>
+    </div>
+  </div>
