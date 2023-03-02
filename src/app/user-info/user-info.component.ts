@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class UserInfoComponent implements OnInit{
   userDetails: any = []
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router){}
+  constructor(private route: ActivatedRoute, private http: HttpClient){}
 
   ngOnInit(){
     this.fetchUserInfo(this.route.snapshot.params['id'])
@@ -21,9 +21,5 @@ export class UserInfoComponent implements OnInit{
     .subscribe((response: any) => {
       this.userDetails = response.data
     })
-  }
-
-  goHome(){
-    this.router.navigateByUrl("")
   }
 }

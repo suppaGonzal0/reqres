@@ -1,10 +1,24 @@
-p-table{
-    margin: 100px;
+h1{
+    text-align: center;
+    margin: 20px 0;
 }
 
-.tr:hover{
-    cursor: pointer;
-    background-color: rgb(241, 241, 241);
+.actions{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.homeContainer{
+    display: flex;
+}
+
+.tableContainer{
+    flex: 2;
+    margin: 0 25px;
+}
+
+p-table{
+    margin: 100px;
 }
 
 .buttons{
@@ -13,4 +27,36 @@ p-table{
     align-items: center;
     gap: 20px;
     margin: 20px 0;
+}
+
+.formContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 50px;
+}
+
+label{
+    width: 100%;
+    text-align: start;
+    margin: 10px 0;
+    color: rgb(86, 86, 86);
+}
+
+.formContainer p-button{
+    margin: 32px 0 0 0;
+}
+
+hr{
+    margin: 0 15px;
+    border: 3px solid rgba(128, 128, 128, 0.305);
 }
