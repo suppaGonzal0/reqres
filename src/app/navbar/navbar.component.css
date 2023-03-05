@@ -1,0 +1,16 @@
+li{
+    list-style: none;
+    color: dodgerblue;
+    padding: 15px;
+}
+
+h3{
+    padding: 15px;
+    cursor: default;
+}
+
+li:hover{
+    background-color: rgba(220, 220, 220, 0.338);
+    color: grey;
+    cursor: pointer;
+}

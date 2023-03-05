@@ -1,0 +1,12 @@
+<p-sidebar [(visible)]="display">
+    <h3>{{role}} Account</h3>
+    <ul>
+        <li routerLink="">User List</li>
+        <li *ngIf="isAdmin()" routerLink="servers">Servers</li>
+        <li *ngIf="isAdminOrPro()" routerLink="promotions">Promotions</li>
+        <li routerLink="settings">Settings</li>
+    </ul>
+</p-sidebar>
+
+<p-button type="text" (click)="display = true"
+icon="pi pi-bars"></p-button>
