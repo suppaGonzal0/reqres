@@ -1,0 +1,14 @@
+<div class="loginContainer">
+    <h1>Login</h1>
+    <p-card>
+        <form #LoggedinUser="ngForm" (ngSubmit)="loginUser(LoggedinUser.value)">
+          <label for="email">Email</label>
+          <input type="text" id="email" pInputText ngModel name="email">
+          <label for="password">Password</label>
+          <input type="password" id="password" pInputText ngModel name="password" >
+          <p *ngIf="wrongCreds">Wrong Credentials!</p>
+          <button pButton type="submit" label="Login" icon="pi pi-sign-in"></button>
+        </form>
+        <p class="createAcc" routerLink="/register">Create New Account</p>
+      </p-card>
+</div>
