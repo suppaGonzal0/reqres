@@ -1,3 +1,5 @@
+import { AdminGuard } from './auth/admin.guard';
+import { RoleGuard } from './auth/role.guard';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http'
@@ -17,10 +19,34 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DialogModule} from 'primeng/dialog';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './auth/auth.guard';
+import {PaginatorModule} from 'primeng/paginator';
+import {SidebarModule} from 'primeng/sidebar';
+import { NavbarComponent } from './navbar/navbar.component';
+import { LogoutComponent } from './logout/logout.component';
+import {TooltipModule} from 'primeng/tooltip';
+import { PromotionsComponent } from './promotions/promotions.component';
+import { SettingsComponent } from './settings/settings.component';
+import { ServersComponent } from './servers/servers.component';
+
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { environment } from '../environments/environment';
+import { RegisterComponent } from './register/register.component';
+
 
 const appRoutes : Routes = [
-  {path: "", component: HomeComponent},
-  {path: ":id", component: UserInfoComponent},
+  {path: "", component: HomeComponent, canActivate:[AuthGuard]},
+  {path: "login", component: LoginComponent},
+  {path: "register", component: RegisterComponent},
+  {path: "servers", component: ServersComponent, canActivate:[AuthGuard, AdminGuard]},
+  {path: "settings", component: SettingsComponent, canActivate:[AuthGuard]},
+  {path: "promotions", component: PromotionsComponent, canActivate:[AuthGuard, RoleGuard]},
+  {path: ":id", component: UserInfoComponent, canActivate:[AuthGuard]}
 ]
 
 @NgModule({
@@ -28,20 +54,35 @@ const appRoutes : Routes = [
     AppComponent,
     UserInfoComponent,
     HomeComponent,
+    LoginComponent,
+    NavbarComponent,
+    LogoutComponent,
+    PromotionsComponent,
+    SettingsComponent,
+    ServersComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes),
     TableModule,
     ButtonModule,
     CardModule,
     InputTextModule,
     ConfirmDialogModule,
     BrowserAnimationsModule,
-    DialogModule
+    DialogModule,
+    PaginatorModule,
+    SidebarModule,
+    TooltipModule,
+    RouterModule.forRoot(appRoutes),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
   ],
   providers: [ConfirmationService],
   bootstrap: [AppComponent]

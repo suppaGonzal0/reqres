@@ -1,4 +1,3 @@
-import { Form } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -29,7 +28,7 @@ export class HomeComponent implements OnInit{
   }
 
   fetchUsers(pageNum: number){
-    this.http.get(`https://reqres.in/api/users?page=${pageNum}`)
+    this.http.get(`https://reqres.in/api/users?page=${pageNum+1}`)
     .subscribe((response: any) => {
       this.users = response.data
     })
@@ -43,10 +42,22 @@ export class HomeComponent implements OnInit{
     const editUserIndex = this.users.findIndex(user => user.id === this.userEditId)
     this.http.put<any>(`https://reqres.in/api/users/${this.userEditId}`, editUser)
         .subscribe(Response => {console.log(Response)
-          this.users[editUserIndex].first_name = Response.firstName
-          this.users[editUserIndex].last_name = Response.lastName
-          this.users[editUserIndex].email = Response.email
-          this.users[editUserIndex].avatar = Response.avatar
+          if(Response.firstName){
+            this.users[editUserIndex].first_name = Response.firstName
+          }
+
+          if(Response.lastName){
+            this.users[editUserIndex].last_name = Response.lastName
+          }
+
+          if(Response.email){
+            this.users[editUserIndex].email = Response.email
+          }
+
+          if(Response.avatar){
+            this.users[editUserIndex].avatar = Response.avatar
+          }
+          
         });
         this.editModal = false
   }
@@ -80,5 +91,4 @@ export class HomeComponent implements OnInit{
     this.editModal = true
     this.userEditId = id
   }
-
 }

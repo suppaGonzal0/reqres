@@ -13,7 +13,7 @@
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-user>
-        <tr>
+        <tr class="tr">
           <td>{{user.id}}</td>
           <td>{{user.first_name}}</td>
           <td>{{user.last_name}}</td>
@@ -27,11 +27,9 @@
           </tr>
       </ng-template>
     </p-table>
+
+    <p-paginator [rows]="6" [totalRecords]="12" (onPageChange)="fetchUsers($event.page)"></p-paginator>
   
-    <div class="buttons">
-      <p-button label="Page 1" (click)="fetchUsers(1)"></p-button>
-      <p-button label="Page 2" (click)="fetchUsers(2)"></p-button>
-    </div>
   </div>
 
   <hr>
@@ -52,7 +50,7 @@
     </p-card>
     <p-confirmDialog header="Delete" icon="pi pi-exclamation-circle"></p-confirmDialog>
 
-    <p-dialog [modal]="true" header="Title" [(visible)]="editModal">
+    <p-dialog [modal]="true" header="Edit User" [(visible)]="editModal">
       <form #editingUser="ngForm" (ngSubmit)="editUser(editingUser.value)">
         <label for="firstName">First Name</label>
         <input type="text" id="firstName" pInputText ngModel name="firstName">
@@ -62,7 +60,7 @@
         <input type="text" id="email" pInputText ngModel name="email" >
         <label for="avatar">Avatar</label>
         <input type="text" id="avatar" pInputText ngModel name="avatar">
-        <p-button label="Edit User" type="submit"></p-button>
+        <p-button label="Edit" type="submit"></p-button>
       </form>
   </p-dialog>
 

@@ -1,1 +1,8 @@
+<div class="navContainer" *ngIf="isLoggedIn()">
+    <div class="homeNav">
+      <app-navbar></app-navbar>
+      <app-logout></app-logout>
+    </div>
+  </div>
+
 <router-outlet></router-outlet>

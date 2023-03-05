@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { AuthService } from './auth/auth.service';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
@@ -7,7 +8,10 @@ import { PrimeNGConfig } from 'primeng/api';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  constructor(private primengConfig: PrimeNGConfig) {}
+  constructor(private primengConfig: PrimeNGConfig, private auth: AuthService) {}
+  isLoggedIn(){
+    return this.auth.isLoggedIn()
+  }
 
   ngOnInit() {
       this.primengConfig.ripple = true;
