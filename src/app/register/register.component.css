@@ -1,0 +1,44 @@
+.registerContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+h1{
+    margin: 24px 0;
+}
+
+button{
+    margin-top: 16px;
+    width: 100%;
+}
+
+p-card{
+    width: 400px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+label, input{
+    width: 100%;
+}
+
+.loginAcc{
+    text-align: center;
+    margin-top: 18px;
+    padding: 8px;
+    width: 100%;
+}
+
+.loginAcc:hover{
+    color: dodgerblue;
+    cursor: pointer;
+    background-color: rgba(174, 214, 255, 0.26);
+}

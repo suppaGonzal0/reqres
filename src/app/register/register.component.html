@@ -1,0 +1,13 @@
+<div class="registerContainer">
+    <h1>Create Account</h1>
+    <p-card>
+        <form #RegisteredUser="ngForm" (ngSubmit)="registerUser(RegisteredUser.value)">
+          <label for="email">Email</label>
+          <input type="text" id="email" pInputText ngModel name="email">
+          <label for="password">Password</label>
+          <input type="password" id="password" pInputText ngModel name="password" >
+          <button pButton type="submit" label="Register" icon="pi pi-pencil"></button>
+        <p class="loginAcc" routerLink="/login">Already Have An Account</p>
+        </form>
+      </p-card>
+</div>
