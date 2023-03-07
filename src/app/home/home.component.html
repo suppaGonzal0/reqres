@@ -1,5 +1,3 @@
-<h1>Home Page</h1>
-
 <div class="homeContainer">
   <div class="tableContainer">
     <p-table [value]="users">
@@ -31,8 +29,6 @@
     <p-paginator [rows]="6" [totalRecords]="12" (onPageChange)="fetchUsers($event.page)"></p-paginator>
   
   </div>
-
-  <hr>
   
   <div class="formContainer">
     <p-card>
@@ -48,6 +44,8 @@
         <p-button label="Create User" type="submit"></p-button>
       </form>
     </p-card>
+  </div>
+
     <p-confirmDialog header="Delete" icon="pi pi-exclamation-circle"></p-confirmDialog>
 
     <p-dialog [modal]="true" header="Edit User" [(visible)]="editModal">
@@ -62,7 +60,6 @@
         <input type="text" id="avatar" pInputText ngModel name="avatar">
         <p-button label="Edit" type="submit"></p-button>
       </form>
-  </p-dialog>
+    </p-dialog>
 
-  </div>
 </div>

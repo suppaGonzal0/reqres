@@ -1,3 +1,4 @@
+import { APIService } from '../shared/services/userAPI.service';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -9,26 +10,21 @@ import {ConfirmationService} from 'primeng/api';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit{
-  users = [{
-    id: '',
-    email: '',
-    first_name: '',
-    last_name: '',
-    avatar: ''
-  }]
+  users = []
 
   editModal = false
   userEditId : any = 0;
 
   constructor(private http: HttpClient, private router: Router,
-    private confirmationService:ConfirmationService){}
+    private confirmationService:ConfirmationService,
+    private apiService: APIService){}
 
   ngOnInit(){
-    this.fetchUsers(1)
+    this.fetchUsers(0)
   }
 
   fetchUsers(pageNum: number){
-    this.http.get(`https://reqres.in/api/users?page=${pageNum+1}`)
+    this.apiService.getUserList(pageNum)
     .subscribe((response: any) => {
       this.users = response.data
     })
@@ -40,7 +36,7 @@ export class HomeComponent implements OnInit{
 
   editUser(editUser: any){
     const editUserIndex = this.users.findIndex(user => user.id === this.userEditId)
-    this.http.put<any>(`https://reqres.in/api/users/${this.userEditId}`, editUser)
+    this.apiService.updateUser(this.userEditId, editUser)
         .subscribe(Response => {console.log(Response)
           if(Response.firstName){
             this.users[editUserIndex].first_name = Response.firstName
@@ -62,11 +58,11 @@ export class HomeComponent implements OnInit{
         this.editModal = false
   }
 
-  deleteUser(id : any){
+  deleteUser(id : number){
     this.confirmationService.confirm({
       message: `Do you want to delete user ID: ${id}?`,
       accept: () => {
-        this.http.delete(`https://reqres.in/api/users/${id}`)
+        this.apiService.deleteUser(id)
         .subscribe(() => {
         this.users.splice(this.users.findIndex(user => user.id === id), 1)
         
@@ -76,12 +72,8 @@ export class HomeComponent implements OnInit{
   }
 
   createUser(userInfo: any, form: any){
-    this.http.post<any>('https://reqres.in/api/users', {
-      first_name: userInfo.firstName,
-      last_name: userInfo.lastName,
-      email: userInfo.email,
-      avatar: userInfo.avatar
-    }).subscribe((Response) => {
+    this.apiService.createUser(userInfo)
+    .subscribe((Response) => {
       this.users.push(Response)
       form.resetForm()
     })
