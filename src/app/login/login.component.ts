@@ -1,5 +1,4 @@
-import { FirebaseService } from '../services/firebase.service';
-import { Router } from '@angular/router';
+import { FirebaseService } from '../shared/services/firebase.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -24,5 +23,9 @@ export class LoginComponent {
     } else{
       this.wrongCreds = true
     }
+  }
+
+  googleSignIn(){
+    this.firebaseService.googleSignIn()
   }
 }
