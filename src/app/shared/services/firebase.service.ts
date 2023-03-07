@@ -1,17 +1,24 @@
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Injectable } from '@angular/core';
+import { GoogleAuthProvider } from '@angular/fire/auth'
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
 
-  constructor(private fireauth: AngularFireAuth, private router: Router) { }
+  constructor(private fireauth: AngularFireAuth, private router: Router) {
+    fireauth.authState.subscribe((userData) => {
+      if(userData){
+        localStorage.setItem("user", JSON.stringify(userData));
+        JSON.parse(localStorage.getItem("user")!);
+      }
+    })
+   }
 
   login(email:string, password: string){
     this.fireauth.signInWithEmailAndPassword(email,password).then( () => {
-      localStorage.setItem("token", "userIsLoggedIn")
       this.router.navigate([''])
     }, err => {
       alert(err.message)
@@ -31,11 +38,21 @@ export class FirebaseService {
 
   logout(){
     this.fireauth.signOut().then( () => {
-      localStorage.removeItem("token")
+      localStorage.removeItem("user")
       localStorage.removeItem("userType")
       this.router.navigate(['login'])
     }, err => {
       alert(err.message)
+    })
+  }
+
+  googleSignIn(){
+    return this.fireauth.signInWithPopup(new GoogleAuthProvider).then(Response => {
+      localStorage.setItem("userType", "Pro User")
+      this.router.navigate([''])
+      console.log(Response.user.email)
+    }, error => {
+      alert(error.message)
     })
   }
 

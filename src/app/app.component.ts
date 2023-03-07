@@ -1,4 +1,4 @@
-import { AuthService } from './auth/auth.service';
+import { AuthService } from './shared/auth/auth.service';
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
 

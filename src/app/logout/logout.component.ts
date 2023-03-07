@@ -1,4 +1,4 @@
-import { FirebaseService } from '../services/firebase.service';
+import { FirebaseService } from '../shared/services/firebase.service';
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 

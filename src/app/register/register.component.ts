@@ -1,4 +1,4 @@
-import { FirebaseService } from '../services/firebase.service';
+import { FirebaseService } from '../shared/services/firebase.service';
 import { Component } from '@angular/core';
 
 @Component({

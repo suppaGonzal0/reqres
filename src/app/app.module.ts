@@ -1,8 +1,9 @@
-import { AdminGuard } from './auth/admin.guard';
-import { RoleGuard } from './auth/role.guard';
+import { AuthInterceptorService } from './shared/services/auth-interceptor.service';
+import { AdminGuard } from './shared/auth/admin.guard';
+import { RoleGuard } from './shared/auth/role.guard';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -20,7 +21,7 @@ import {ConfirmationService} from 'primeng/api';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DialogModule} from 'primeng/dialog';
 import { LoginComponent } from './login/login.component';
-import { AuthGuard } from './auth/auth.guard';
+import { AuthGuard } from './shared/auth/auth.guard';
 import {PaginatorModule} from 'primeng/paginator';
 import {SidebarModule} from 'primeng/sidebar';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -84,7 +85,12 @@ const appRoutes : Routes = [
     AngularFireStorageModule,
     AngularFireDatabaseModule,
   ],
-  providers: [ConfirmationService],
+  providers: [ConfirmationService, 
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
